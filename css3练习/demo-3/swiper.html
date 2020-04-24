@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播</title>
+    <link rel="stylesheet" href="./css/marquee1.css">
+    <script src=""></script>
+</head>
+
+<body>
+    <div class="marquee">
+        <div class="content">
+            <div class="list"><img src="./img/timg (1).jpg" alt=""></div>
+            <div class="list"><img src="./img/timg (2).jpg" alt=""></div>
+            <div class="list"><img src="./img/timg.jpg" alt=""></div>
+        </div>
+    </div>
+    <button id="preBtn"><< pre</button>
+    <button id="nextBtn">next >></button>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <script>
+        // 页面初始化时就加载
+        $(() => {
+            var outerWidth = 600,
+                outerHeight = 400,
+                speed = 3,
+                initIndex = 0,
+                timer = null,
+                transitionTime = .3;
+            var $marquee = $('.marquee');
+            var $content = $marquee.find('.content');
+            var $list = $content.find('.list');
+            var listLength = $list.length;
+            // content宽度
+            var contentWidth = outerWidth * listLength;
+            // 获取页面样式，作用：？
+            var style = document.styleSheets;
+            $marquee.css({
+                "width": `${outerWidth}px`,
+                "height": `${outerHeight}px`
+            })
+            $list.css({
+                    "width": `${outerWidth}px`,
+                    "height": `${outerHeight}px`
+                })
+                // content宽高需要根据list计算
+            $content.css({
+                    "width": `${contentWidth}px`,
+                    "height": `${outerHeight}px`,
+                    // "animation": `run ${speed*listLength}s linear infinite`
+                })
+                // 在样式表里注入一个规则
+                // style[0].insertRule(
+                //         `@keyframes run {
+                //         100%{
+                //             transform: translateX(-${contentWidth}px);
+                //         }
+                //     }`
+                //     )
+                // 克隆第一张图片
+            var clone = $list.eq(0).clone();
+            // 放到content中去
+            $content.append(clone);
+
+            // 自动播放
+            function autoPlay() {
+                // 设置一个定时器
+                timer = setInterval(() => {
+                    // 累加器
+                    initIndex++;
+                    $content.css({
+                        "transition": `transform ${transitionTime}s ease`,
+                        "transform": `translateX(-${outerWidth * initIndex}px)`
+                    })
+                    initIndex === listLength ? initIndex = 0 : '';
+                }, speed * 1000);
+            }
+            // autoPlay();
+            // 最后一帧切换没有动画，实现无缝衔接
+            // 监听动画结束事件
+            $content[0].addEventListener("transitionend", () => {
+                $content.css({
+                    "transition": `none`,
+                    "transform": `translateX(-${outerWidth * initIndex}px)`
+                })
+
+            })
+            $("#preBtn").mouseenter(() => {
+                    if (initIndex === 0) {
+                        initIndex = listLength;
+                        $content.css({
+                            "transition": `none`,
+                            "transform": `translateX(-${outerWidth * initIndex}px)`
+                        })
+                    }
+                })
+                // 手动向左滑动图片
+            $("#preBtn").click(() => {
+                    // listLength 图片个数：3
+                    // initIndex === 0 ? initIndex = listLength : "";
+                    initIndex--;
+                    // console.log(initIndex);
+                    $content.css({
+                        "transition": `transform ${transitionTime}s ease`,
+                        "transform": `translateX(-${outerWidth * initIndex}px)`
+                    })
+                    initIndex === 0 ? initIndex = listLength : "";
+
+                })
+                // 手动向右滑动图片
+            $("#nextBtn").click(() => {
+                initIndex++;
+                $content.css({
+                    "transition": `transform ${transitionTime}s ease`,
+                    "transform": `translateX(-${outerWidth * initIndex}px)`
+                })
+                initIndex === listLength ? initIndex = 0 : "";
+
+            })
+        })
+    </script>
+</body>
+
+</html>

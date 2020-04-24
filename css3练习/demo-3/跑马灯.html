@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/marquee.css">
+    <script src=""></script>
+</head>
+
+<body>
+    <div class="marquee">
+        <div class="content">
+            <div class="list"><img src="./img/timg (1).jpg" alt=""></div>
+            <div class="list"><img src="./img/timg (2).jpg" alt=""></div>
+            <div class="list"><img src="./img/timg.jpg" alt=""></div>
+        </div>
+    </div>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <script>
+        // 页面初始化时就加载
+        $(() => {
+            var outerWidth = 600,
+                outerHeight = 400,
+                speed = 3;
+            var $marquee = $('.marquee');
+            var $content = $marquee.find('.content');
+            var $list = $content.find('.list');
+            var listLength = $list.length;
+            // content宽度
+            var contentWidth = outerWidth * listLength;
+            // 获取页面样式，作用：？
+            var style = document.styleSheets;
+            $marquee.css({
+                "width": `${outerWidth}px`,
+                "height": `${outerHeight}px`
+            })
+            $list.css({
+                    "width": `${outerWidth}px`,
+                    "height": `${outerHeight}px`
+                })
+                // content宽高需要根据list计算
+            $content.css({
+                    "width": `${contentWidth}px`,
+                    "height": `${outerHeight}px`,
+                    "animation": `run ${speed*listLength}s linear infinite`
+                })
+                // 在样式表里注入一个规则
+            style[0].insertRule(
+                    `@keyframes run {
+                    100%{
+                        transform: translateX(-${contentWidth}px);
+                    }
+                }`
+                )
+                // 克隆第一张图片
+            var clone = $list.eq(0).clone();
+            // 放到content中去
+            $content.append(clone);
+        })
+    </script>
+</body>
+
+</html>

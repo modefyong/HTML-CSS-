@@ -1,0 +1,61 @@
+body,
+html {
+    height: 100%;
+}
+
+.content {
+    position: relative;
+    height: 100%;
+    background: #f2f2f2;
+    overflow: hidden;
+    .rain {
+        // 气球样式
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        // background: #faf9f9;
+        /*css3 圆角属性*/
+        border-radius: 50% 50% 25% 50%;
+        /*顺时针旋转45度*/
+        transform: rotate(45deg);
+        /*盒子阴影 x位移 y位移 羽化 半径 颜色 */
+        box-shadow: -2px -2px 80px -8px #f7091d inset;
+        // background: red;
+        opacity: 0;
+        // ellipse(宽 高 at x y)
+        // clip-path: ellipse(10% 30% at 50% 50%);
+        animation: drops 2s cubic-bezier(0.69, -0.04, 0.82, 0.9) infinite reverse;
+        &:after {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            content: "";
+            display: block;
+            /*width: 18px;
+ 
+             height: 18px;*/
+            /*background: #873940;*/
+            /*transform: rotate(45deg);*/
+            border: 8px solid transparent;
+            // border-right-color: #873940;
+            transform: rotate(45deg);
+            border-radius: 50%;
+        }
+    }
+}
+
+@keyframes drops {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0s;
+        transform: translate3d(10px, 100vh, -10px);
+    }
+}

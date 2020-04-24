@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/drop.css">
+    <script src=""></script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="rain">
+
+        </div>
+    </div>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <script>
+        // 1.选中盛放雨滴的容器
+        let $content = $('.content');
+        // 初始化雨滴位置
+        let initNumber = 0;
+        for (let i = 0; i < 30; i++) {
+            let lefts = Math.floor(Math.random() * 5 + 2);
+            // 雨滴落下的延迟时间
+            let delay = Math.floor(Math.random() * 50 + 2);
+            let color = Math.floor(Math.random() * 16777215).toString(16);
+            initNumber += lefts;
+            // 创建dom元素（雨滴）
+            let $div = $('<div />').addClass('rain').css({
+                // 模板字符串
+                "left": `${initNumber}%`,
+                "top": `${lefts}%`,
+                "animation-delay": `${delay/10}s`,
+                // "background": `#${color}`
+            });
+            $content.append($div);
+        }
+    </script>
+</body>
+
+</html>

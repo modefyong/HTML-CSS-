@@ -1,0 +1,13 @@
+.box {
+  width: 400px;
+  height: 80px;
+  background-color: #000;
+}
+
+.demo-1 {
+  transition: width 0.2s linear;
+}
+
+.demo-1:hover {
+  width: 500px;
+}
