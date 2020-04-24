@@ -1,0 +1,48 @@
+css：
+1.>作用于元素的第一代后代，空格作用于元素的所有后代。
+2.选择器的优先级依次是: 内联样式 > id选择器 > 类选择器 > 标签选择器 > 通配符选择器。
+3.权值。标签的权值为1，类选择符的权值为10，ID选择符的权值最高为100。
+4.长度单位目前比较常用到px（像素）、em、% 百分比，要注意其实这三种单位都是相对单位。
+5.常用的内联块状元素有：
+<img>、<input>
+6.border-radius可以设置四个方向的弧度：分别为左上角、右上角、右下角、左下角。
+7.给子元素设置flex属性,可以设置子元素相对于父元素的占比。
+8.flex属性的值只能是正整数,表示占比多少。
+9.给子元素设置了flex之后,其宽度属性会失效。
+10.如果被设置元素为文本、图片等行内元素时，水平居中是通过给父元素设置 text-align:center 来实现的。
+
+css3动画：
+目标：
+1.熟练使用transition和animation中的name during；
+2.动画库拿来就用，通过观察其他动画有好的实现方案；
+3.复杂动画的开发和实现。
+前言：
+1.写动画前期一定要善于学习别人的思路。
+2.在借鉴前，最好先自己先脑洞下自己的思路。
+3.善于对比和总结，因为这真的是一个学起来简单，做起来难的属性。
+一、transition 基础和使用
+1.属性名称（property）
+2.过渡时间（duration） 延迟时间（delay）
+3.时间函数（timing-function）
+注意：
+1.diaplay不能和transition一起使用。
+2.transition后面尽量不要跟all。会造成大量资源浪费，影响运行性能，页面会卡。
+3.常见闪动解决方案：可以用perspective和backface-visibility。
+二、animation基础和写法
+1.动画名称（name） -- @keyframes
+2.过渡时间（duration） 延迟时间（delay）
+3.时间函数（time-function）
+4.播放次数（iteration-count）
+5.播放方向（direction）即是否轮流播放和反向播放。
+6.停止播放的状态（fill-mode），是否暂停（play-state）。
+三、js监听事件
+1.animationstart
+2.animationend、transitionend
+3.animationitertion
+四、练习实战
+1.雨滴下落
+2.图片跑马灯
+3.轮播图
+
+js：
+在 ` ` 中可以使用 ${ }直接把变量与字符串拼接起来
